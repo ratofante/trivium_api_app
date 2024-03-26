@@ -11,6 +11,7 @@ const form = ref({
 })
 
 const user = ref()
+const questions = ref()
 
 async function onLogin() {
   await axios.get('http://localhost:8000/sanctum/csrf-cookie')
@@ -24,8 +25,10 @@ async function onLogin() {
   console.log(user.value)
 }
 
-async function getCategories() {
-  let { data } = await axios.get('http://localhost:8000/api/cate')
+async function getQuestions() {
+  let { data } = await axios.get('http://localhost:8000/api/questions')
+  questions.value = data
+  console.log(questions.value)
 }
 </script>
 
@@ -46,8 +49,8 @@ async function getCategories() {
       <div><button>Submit</button></div>
     </form>
     <div>
-      <h2>Get categories</h2>
-      <button @click="getCategories">Get</button>
+      <h2>Get Questions</h2>
+      <button @click="getQuestions">Get</button>
     </div>
   </main>
 </template>
